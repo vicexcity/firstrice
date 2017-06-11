@@ -1,0 +1,91 @@
+*.font: xft:Nanum Gothic Font:pixelsize=12
+
+Xft.dpi:                        96
+Xft.antialias:                  1
+Xft.autohint:                   1
+Xft.hinting:                    1
+Xft.hintstyle:                  hintslight
+Xft.lcdfilter:                  lcdlight
+Xft.rgba:                       rgb
+
+URxvt*termName:                 xterm
+URxvt.depth:                    32
+URxvt*lineSpace:                1
+URxvt.letterSpace:              -2
+URxvt.iso14755:                 false
+URxvt.iso14755_52:              false
+URxvt*geometry:                 65x17
+URxvt.scrollBar:                false
+URxvt*loginShell:               true
+URxvt.internalBorder:           5
+URxvt.perl-ext:	 		default,matcher
+URxvt.matcher.button: 			0
+
+*.foreground:   #ffeefc
+*.background:   #404552
+*.cursorColor:  #c16772
+
+! black
+*.color0:       #4f4858
+*.color8:       #545d67
+
+! red
+*.color1:       #c05c47
+*.color9:       #c16772
+
+! green
+*.color2:       #428e8e
+*.color10:      #afda6e
+
+! yellow
+*.color3:       #e4b226
+*.color11:      #ebcf1a
+
+! blue
+*.color4:       #4457a3
+*.color12:      #4880a5
+
+! magenta
+*.color5:       #903a62
+*.color13:      #9568a1
+
+! cyan
+*.color6:       #7aa1dc
+*.color14:      #abbcda
+
+! white
+*.color7:       #c4b7c5
+*.color15:      #ffeefc
+
+rofi.color-enabled: true
+rofi.color-window: #141021, #c16772, #9568a1
+rofi.color-normal: #141021, #ffeefc, #312842, #c16772, #ffeefc
+rofi.color-active: #141021, #c05c47, #312842, #c05c47, #ffeefc
+rofi.color-urgent: #141021, #e4b226, #312842, #e4b226, #ffeefc
+rofi.width: 600
+rofi.padding: 15
+rofi.font: Monospace 12
+rofi.bw: 3
+rofi.separator-style: solid
+rofi.hide-scrollbar: true
+rofi.opacity: 75
+
+from __future__ import (absolute_import, division, print_function)
+
+from ranger.colorschemes.default import Default
+from ranger.gui.color import yellow, red, blue
+
+
+class Scheme(Default):
+    progress_bar_color = red
+
+    def use(self, context):
+        fg, bg, attr = Default.use(self, context)
+
+        if context.directory and not context.marked and not context.link \
+                and not context.inactive_pane:
+            fg = red
+
+        if context.in_titlebar and context.hostname:
+            fg = yellow if context.bad else blue
+
